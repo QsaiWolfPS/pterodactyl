@@ -1,0 +1,15 @@
+./hlds_run -pidfile hlds_{{SERVER_PORT}} -game cstrike -{{SRV_SECURE}} +port {{SERVER_PORT}} +sv_lan 0 +maxplayers {{SRV_SLOTS}} +map {{SRV_STARTMAP}} +sys_ticrate 1200 -norestart
+
+
+sed -i '1i\// FastDL Config Start' cstrike/server.cfg && \
+sed -i '/^sv_downloadurl/d' cstrike/server.cfg && \
+sed -i '/^sv_allowdownload/d' cstrike/server.cfg && \
+sed -i '/^sv_allowupload/d' cstrike/server.cfg && \
+sed -i '/^sv_filetransfercompression/d' cstrike/server.cfg && \
+sed -i '/^sv_send_resources/d' cstrike/server.cfg && \
+echo sv_downloadurl "http://{{SERVER_IP}}/{{P_SERVER_UUID}}/cstrike" >> cstrike/server.cfg && \
+echo "sv_allowdownload {{FASTDL}}" >> cstrike/server.cfg && \
+echo "sv_allowupload 0" >> cstrike/server.cfg && \
+echo "sv_filetransfercompression 1" >> cstrike/server.cfg && \
+echo "sv_send_resources 1" >> cstrike/server.cfg && \
+./hlds_run -pidfile hlds_{{SERVER_PORT}} -game cstrike -{{SRV_SECURE}} +port {{SERVER_PORT}} +sv_lan 0 +maxplayers {{SRV_SLOTS}} +map {{SRV_STARTMAP}} +sys_ticrate 1200 -norestart
